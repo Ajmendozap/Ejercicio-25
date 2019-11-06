@@ -1,7 +1,8 @@
 #include <iostream>
 
-void relleno(float a);
-float Imprimecabezas(float *a);
+void relleno(float **a, int numero);
+float Imprimecabeza(float **a, int numero);
+float Imprimematriz(float **a,int numero);
 
 int main(void)
 {
@@ -13,9 +14,14 @@ int main(void)
 		std::cout<<"El número ingresado no está en el rango solicitado."<<std::endl;
 	}
 	else{
-		float M[numero+2][numero];
+		float ** M= new float *[numero+2];
+        for (int i;i<numero;i++)
+        {
+            M[i]= new float[numero];
+        }
 		relleno(M,numero);
-		Imprimecabezas(M,numero);
+        Imprimecabeza(M,numero);
+        Imprimematriz(M,numero);
 	}
 
 	return 0;
@@ -23,29 +29,39 @@ int main(void)
 
 void relleno(float **a,int numero)
 {
-	int b= numero+2;
-	for (float i=0;i<numero;i++)
+	for (int i=0;i<numero+2;i++)
 	{
-		for(float j=0;j<(b);j++)
+		for(int j=0;j<numero;j++)
 		{
 			a[j][i]= i+j;
 		}
 	}
 }
 
-float Imprimecabezas(float **a,int numero)
+float Imprimecabeza(float **a,int numero)
 {
-	int b= numero+2;
-	float suma;
-	std::cout << "La primera fila es "<<std::endl;
-	for (float i=0;i<numero;i++)
+	float suma=0;
+	std::cout << "La primera fila es: "<<std::endl;
+	for (int i=0;i<numero+2;i++)
 	{
-		std::cout<<a[i][0]<<std::endl;
+        float b= a[0][i];
+		std::cout<<""<<b<<""<<std::endl;
 	}
-	std::cout << "la suma de los elementos de la primera columna es "<<std::endl;
-	for (float i=0;i<numero;i++)
+	std::cout << "la suma de los elementos de la primera columna es: "<<std::endl;
+	for (int i=0;i<numero;i++)
 	{
 		suma+= a[0][i];
 	}
-	std::cout<<""<<suma<<std::endl;
+	std::cout<<""<<suma<<""<<std::endl;
+}
+float Imprimematriz(float **a,int numero)
+{
+    for(int i;i<numero+2;i++)
+    {
+        for(int j;j<numero;j++)
+        {
+            std::cout<<a[j][i];
+        }
+        std::cout<<std::endl;
+    }
 }
